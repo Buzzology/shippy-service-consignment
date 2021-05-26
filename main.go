@@ -7,8 +7,8 @@ import (
 	"os"
 
 	// This is the generated protobuf code
-	pb "github.com/buzzology/go-microservices-tutorial/shippy-service-consignment/proto/consignment"
-	vesselPb "github.com/buzzology/go-microservices-tutorial/shippy-service-vessel/proto/vessel"
+	pb "github.com/buzzology/shippy-service-consignment/proto/consignment"
+	vesselPb "github.com/buzzology/shippy-service-vessel/proto/vessel"
 	micro "github.com/micro/go-micro/v2"
 )
 

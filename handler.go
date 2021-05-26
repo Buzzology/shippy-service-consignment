@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	pb "github.com/buzzology/go-microservices-tutorial/shippy-service-consignment/proto/consignment"
-	vesselPb "github.com/buzzology/go-microservices-tutorial/shippy-service-vessel/proto/vessel"
+	pb "github.com/buzzology/shippy-service-consignment/proto/consignment"
+	vesselPb "github.com/buzzology/shippy-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
 )
 
