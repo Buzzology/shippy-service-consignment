@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	pb "github.com/buzzology/shippy-service-consignment/proto/consignment"
-	vesselPb "github.com/buzzology/shippy-service-vessel/proto/vessel"
+	pb "github.com/Buzzology/shippy-service-consignment/proto/consignment"
+	vesselPb "github.com/Buzzology/shippy-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
 )
 

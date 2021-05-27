@@ -1,11 +1,11 @@
-module github.com/buzzology/shippy-service-consignment
+module github.com/Buzzology/shippy-service-consignment
 
 go 1.16
 
 replace google.golang.org/grpc v1.38.0 => google.golang.org/grpc v1.26.0
 
 require (
-	github.com/Buzzology/shippy-service-vessel v0.0.1
+	github.com/Buzzology/shippy-service-vessel v0.0.4
 	github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d // indirect
 	github.com/golang/protobuf v1.5.2
 	github.com/kr/pretty v0.2.0 // indirect

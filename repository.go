@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	pb "github.com/buzzology/shippy-service-consignment/proto/consignment"
+	pb "github.com/Buzzology/shippy-service-consignment/proto/consignment"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
