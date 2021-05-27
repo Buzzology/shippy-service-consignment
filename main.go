@@ -12,7 +12,7 @@ import (
 	micro "github.com/micro/go-micro/v2"
 )
 
-const defaultHost = "datastore:27017"
+const defaultHost = "mongodb://localhost:27017"
 
 func main() {
 
@@ -41,7 +41,7 @@ func main() {
 	// Prepare repository and handlers
 	consignmentCollection := client.Database("shippy").Collection("consignments")
 	repository := &MongoRepository{consignmentCollection}
-	vesselClient := vesselPb.NewVesselService("shippy.service.client", service.Client())
+	vesselClient := vesselPb.NewVesselService("shippy.service.vessel", service.Client())
 	h := &handler{repository, vesselClient}
 
 	// Register handlers

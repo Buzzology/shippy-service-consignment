@@ -16,3 +16,4 @@
 # vendor/
 
 data/db
+__debug*

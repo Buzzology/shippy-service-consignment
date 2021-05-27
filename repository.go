@@ -4,6 +4,8 @@ import (
 	"context"
 	pb "github.com/Buzzology/shippy-service-consignment/proto/consignment"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/bson"
+	"fmt"
 )
 
 type Consignment struct {
@@ -30,7 +32,6 @@ func MarshalContainerCollection(containers []*pb.Container) []*Container {
 	return collection
 }
 
-
 func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 	collection := make([]*pb.Container, 0)
 	for _, container := range containers {
@@ -40,42 +41,38 @@ func UnmarshalContainerCollection(containers []*Container) []*pb.Container {
 	return collection
 }
 
-
 func MarshalContainer(container *pb.Container) *Container {
-	return &Container {
-		ID: container.Id,
+	return &Container{
+		ID:         container.Id,
 		CustomerID: container.CustomerId,
-		UserID: container.UserId,
+		UserID:     container.UserId,
 	}
 }
-
 
 func MarshalConsignment(consignment *pb.Consignment) *Consignment {
 	containers := MarshalContainerCollection(consignment.Containers)
 
-	return &Consignment {
-		ID: consignment.Id,
-		Weight: consignment.Weight,
+	return &Consignment{
+		ID:          consignment.Id,
+		Weight:      consignment.Weight,
 		Description: consignment.Description,
-		Containers: containers,
-		VesselID: consignment.VesselId,
+		Containers:  containers,
+		VesselID:    consignment.VesselId,
 	}
 }
-
 
 func UnmarshalConsignment(consignment *Consignment) *pb.Consignment {
 
 	containers := UnmarshalContainerCollection(consignment.Containers)
 
-	return &pb.Consignment {
-		Id: consignment.ID,
+	return &pb.Consignment{
+		Id:          consignment.ID,
 		Description: consignment.Description,
-		Weight: consignment.Weight,
+		Weight:      consignment.Weight,
 		Containers:  containers,
-		VesselId: consignment.VesselID,
+		VesselId:    consignment.VesselID,
 	}
 }
-
 
 func UnmarshConsignmentCollection(consignments []*Consignment) []*pb.Consignment {
 	collection := make([]*pb.Consignment, 0)
@@ -86,12 +83,11 @@ func UnmarshConsignmentCollection(consignments []*Consignment) []*pb.Consignment
 	return collection
 }
 
-
 func UnmarshalContainer(container *Container) *pb.Container {
-	return &pb.Container {
-		Id: container.ID,
+	return &pb.Container{
+		Id:         container.ID,
 		CustomerId: container.CustomerID,
-		UserId: container.UserID,
+		UserId:     container.UserID,
 	}
 }
 
@@ -111,10 +107,15 @@ func (repository *MongoRepository) Create(ctx context.Context, consignment *Cons
 }
 
 func (repository *MongoRepository) GetAll(ctx context.Context) ([]*Consignment, error) {
-	cursor, err := repository.collection.Find(ctx, nil, nil)
+	cursor, err := repository.collection.Find(ctx, bson.D{{}})
+
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
 
 	var consignments []*Consignment
-	for cursor.Next(ctx){
+	for cursor.Next(ctx) {
 		var consignment *Consignment
 		if err := cursor.Decode(&consignment); err != nil {
 			return nil, err

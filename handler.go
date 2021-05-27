@@ -5,6 +5,7 @@ import (
 	pb "github.com/Buzzology/shippy-service-consignment/proto/consignment"
 	vesselPb "github.com/Buzzology/shippy-service-vessel/proto/vessel"
 	"github.com/pkg/errors"
+	"fmt"
 )
 
 type handler struct {
@@ -20,6 +21,10 @@ func (s *handler) CreateConsignment(ctx context.Context, req *pb.Consignment, re
 		Capacity: int32(len(req.Containers)),
 		MaxWeight: req.Weight,
 	})
+
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	if vesselResponse == nil {
 		return errors.New("Error fetching vessel, returned nil")
